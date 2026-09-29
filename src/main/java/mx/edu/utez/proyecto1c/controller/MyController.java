@@ -1,6 +1,9 @@
 package mx.edu.utez.proyecto1c.controller;
 
 import jakarta.validation.Valid;
+import mx.edu.utez.proyecto1c.dto.RequestCalculadoraDTO;
+import mx.edu.utez.proyecto1c.service.MyService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,22 @@ import mx.edu.utez.proyecto1c.dto.RequestBodyDTO; // <-- Importación que faltab
 @CrossOrigin({"*"})
 @RequestMapping("/my-services")
 public class MyController {
+
+    ///declara q ocupa esa instancia por medio de u8n constructor
+
+    ///para lo de calculaadora y añadir constructor
+    private final MyService service;
+  ////declara q cioontroler necesita a myservice
+  /// y q necesita esa instancia
+    public MyController(MyService service) {
+        this.service = service;
+    }
+
+
+
+
+
+
 
     @GetMapping
     public String miPrimerServicio() {
@@ -85,4 +104,28 @@ public class MyController {
         }
         return nombre_alumno;
     }
+
+    ////servicio de cvaxlculadora
+    @PostMapping("/calculadora")
+    public double Calculadora(@RequestBody @Valid RequestCalculadoraDTO payload) throws BadRequestException {
+        /////inyeccion de dependencias
+        return service.calculadora(payload);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

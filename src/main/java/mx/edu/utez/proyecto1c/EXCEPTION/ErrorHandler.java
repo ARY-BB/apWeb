@@ -1,5 +1,6 @@
 package mx.edu.utez.proyecto1c.EXCEPTION;
 
+import mx.edu.utez.proyecto1c.EXCEPTION.customExceptions.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,15 +14,28 @@ import java.util.Map;
 public class ErrorHandler {
 
 
-        @ExceptionHandler(MethodArgumentNotValidException.class)
-        public ResponseEntity<Map<String, String>> validar(
-                MethodArgumentNotValidException ex) {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> validar(
+            MethodArgumentNotValidException ex) {
 
-            Map<String, String> errores = new LinkedHashMap<>();
-            for (FieldError err : ex.getBindingResult().getFieldErrors()) {
-                errores.put(err.getField(), err.getDefaultMessage());
-            }
-
-            return ResponseEntity.badRequest().body(errores);
+        Map<String, String> errores = new LinkedHashMap<>();
+        for (FieldError err : ex.getBindingResult().getFieldErrors()) {
+            errores.put(err.getField(), err.getDefaultMessage());
         }
+
+        return ResponseEntity.badRequest().body(errores);
+    }
+
+////agregar la excepsion del mensaje de calculadora
+
+@ExceptionHandler(BadRequestException.class)
+public ResponseEntity<Map<String, String>> manejarBadRequest(
+        BadRequestException ex) {
+
+    Map<String, String> errores = new LinkedHashMap<>();
+    errores.put("error", ex.getMessage());
+
+    return ResponseEntity.badRequest().body(errores);
 }
+}
+
