@@ -35,7 +35,7 @@ public class Persona {
     private String correo;
     private String curp;
 
-
+/*
    /////relacion muchos a muchos con curso es la tabla de en medio//////
     @ManyToMany
     @JoinTable(
@@ -45,6 +45,6 @@ public class Persona {
     )
     ////porque puede tener muchos cursos
     private List<Cursos> cursos;
-
+*/
 
 }
