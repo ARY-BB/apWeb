@@ -50,4 +50,6 @@ public class Usuario {
     @JoinColumn(name="persona_id")
     private Persona persona;
 
+    public void getDescripccion(String descripccion) {
+    }
 }
