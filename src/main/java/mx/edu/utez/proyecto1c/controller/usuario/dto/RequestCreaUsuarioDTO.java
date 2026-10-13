@@ -1,13 +1,14 @@
 package mx.edu.utez.proyecto1c.controller.usuario.dto;
 
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -35,5 +36,22 @@ public class RequestCreaUsuarioDTO {
     private String rol;
 
     private String descripccion;
+
+    //////datos de persona////
+     @NotBlank(message = "el nombre es obligatorio")
+    private String nombres;
+    @NotBlank(message = "el primer apellido es obligatorio")
+    private String primerApellido;
+    private String segundoApellido;
+
+    @Past
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date fechaNacimiento;
+    @NotBlank(message = "el correo es obligatorio")
+    @Email(message = "el correo es invalido")
+    private String correo;
+    @NotBlank(message = "el curp es obligatorio")
+
+    private String curp;
 
 }

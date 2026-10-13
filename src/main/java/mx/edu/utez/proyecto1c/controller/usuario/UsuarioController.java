@@ -1,13 +1,12 @@
 package mx.edu.utez.proyecto1c.controller.usuario;
 
 
+import jakarta.validation.Valid;
+import mx.edu.utez.proyecto1c.controller.usuario.dto.RequestCreaUsuarioDTO;
 import mx.edu.utez.proyecto1c.model.usuario.Usuario;
 import mx.edu.utez.proyecto1c.service.usuario.UsuarioService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +30,13 @@ public class UsuarioController {
                 .body(
                         this.usuarioService.getAllUsers()
                 );
+    }
+    ///creacion de nuevo recurso
+    @PostMapping
+    public ResponseEntity<Usuario> createUser (@RequestBody @Valid RequestCreaUsuarioDTO payload){
+        return ResponseEntity.status(201).body(
+                this.usuarioService.createUser(payload)
+        );
     }
 }
 ///en postman se puso http://localhost:33666/usuario y metodo GET el servicio contesto sin rpoblemas
